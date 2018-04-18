@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bit.gd.dao.GDResultPdodMapper" >
+  <resultMap id="BaseResultMap" type="bit.gd.pojo.GDResultPdod" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="parameters_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="imjxx_png" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="imjxy_png" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="imjyx_png" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="imjyy_png" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="rejxx_png" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="rejxy_png" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="rejyx_png" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="rejyy_png" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="imjxx_mat" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="imjxy_mat" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="imjyx_mat" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="imjyy_mat" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="rejxx_mat" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="rejxy_mat" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="rejyx_mat" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="rejyy_mat" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, parameters_id, user_no, imjxx_png, imjxy_png, imjyx_png, imjyy_png, rejxx_png, 
+    rejxy_png, rejyx_png, rejyy_png, imjxx_mat, imjxy_mat, imjyx_mat, imjyy_mat, rejxx_mat, 
+    rejxy_mat, rejyx_mat, rejyy_mat, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gd_result_pdod
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gd_result_pdod
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="bit.gd.pojo.GDResultPdod" useGeneratedKeys="true" keyProperty="id">
+    insert into gd_result_pdod (id, parameters_id, user_no, 
+      imjxx_png, imjxy_png, imjyx_png, 
+      imjyy_png, rejxx_png, rejxy_png, 
+      rejyx_png, rejyy_png, imjxx_mat, 
+      imjxy_mat, imjyx_mat, imjyy_mat, 
+      rejxx_mat, rejxy_mat, rejyx_mat, 
+      rejyy_mat, create_time)
+    values (#{id,jdbcType=INTEGER}, #{parametersId,jdbcType=INTEGER}, #{userNo,jdbcType=VARCHAR}, 
+      #{imjxxPng,jdbcType=VARCHAR}, #{imjxyPng,jdbcType=VARCHAR}, #{imjyxPng,jdbcType=VARCHAR}, 
+      #{imjyyPng,jdbcType=VARCHAR}, #{rejxxPng,jdbcType=VARCHAR}, #{rejxyPng,jdbcType=VARCHAR}, 
+      #{rejyxPng,jdbcType=VARCHAR}, #{rejyyPng,jdbcType=VARCHAR}, #{imjxxMat,jdbcType=VARCHAR}, 
+      #{imjxyMat,jdbcType=VARCHAR}, #{imjyxMat,jdbcType=VARCHAR}, #{imjyyMat,jdbcType=VARCHAR}, 
+      #{rejxxMat,jdbcType=VARCHAR}, #{rejxyMat,jdbcType=VARCHAR}, #{rejyxMat,jdbcType=VARCHAR}, 
+      #{rejyyMat,jdbcType=VARCHAR}, now())
+  </insert>
+  <insert id="insertSelective" parameterType="bit.gd.pojo.GDResultPdod" >
+    insert into gd_result_pdod
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="parametersId != null" >
+        parameters_id,
+      </if>
+      <if test="userNo != null" >
+        user_no,
+      </if>
+      <if test="imjxxPng != null" >
+        imjxx_png,
+      </if>
+      <if test="imjxyPng != null" >
+        imjxy_png,
+      </if>
+      <if test="imjyxPng != null" >
+        imjyx_png,
+      </if>
+      <if test="imjyyPng != null" >
+        imjyy_png,
+      </if>
+      <if test="rejxxPng != null" >
+        rejxx_png,
+      </if>
+      <if test="rejxyPng != null" >
+        rejxy_png,
+      </if>
+      <if test="rejyxPng != null" >
+        rejyx_png,
+      </if>
+      <if test="rejyyPng != null" >
+        rejyy_png,
+      </if>
+      <if test="imjxxMat != null" >
+        imjxx_mat,
+      </if>
+      <if test="imjxyMat != null" >
+        imjxy_mat,
+      </if>
+      <if test="imjyxMat != null" >
+        imjyx_mat,
+      </if>
+      <if test="imjyyMat != null" >
+        imjyy_mat,
+      </if>
+      <if test="rejxxMat != null" >
+        rejxx_mat,
+      </if>
+      <if test="rejxyMat != null" >
+        rejxy_mat,
+      </if>
+      <if test="rejyxMat != null" >
+        rejyx_mat,
+      </if>
+      <if test="rejyyMat != null" >
+        rejyy_mat,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parametersId != null" >
+        #{parametersId,jdbcType=INTEGER},
+      </if>
+      <if test="userNo != null" >
+        #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="imjxxPng != null" >
+        #{imjxxPng,jdbcType=VARCHAR},
+      </if>
+      <if test="imjxyPng != null" >
+        #{imjxyPng,jdbcType=VARCHAR},
+      </if>
+      <if test="imjyxPng != null" >
+        #{imjyxPng,jdbcType=VARCHAR},
+      </if>
+      <if test="imjyyPng != null" >
+        #{imjyyPng,jdbcType=VARCHAR},
+      </if>
+      <if test="rejxxPng != null" >
+        #{rejxxPng,jdbcType=VARCHAR},
+      </if>
+      <if test="rejxyPng != null" >
+        #{rejxyPng,jdbcType=VARCHAR},
+      </if>
+      <if test="rejyxPng != null" >
+        #{rejyxPng,jdbcType=VARCHAR},
+      </if>
+      <if test="rejyyPng != null" >
+        #{rejyyPng,jdbcType=VARCHAR},
+      </if>
+      <if test="imjxxMat != null" >
+        #{imjxxMat,jdbcType=VARCHAR},
+      </if>
+      <if test="imjxyMat != null" >
+        #{imjxyMat,jdbcType=VARCHAR},
+      </if>
+      <if test="imjyxMat != null" >
+        #{imjyxMat,jdbcType=VARCHAR},
+      </if>
+      <if test="imjyyMat != null" >
+        #{imjyyMat,jdbcType=VARCHAR},
+      </if>
+      <if test="rejxxMat != null" >
+        #{rejxxMat,jdbcType=VARCHAR},
+      </if>
+      <if test="rejxyMat != null" >
+        #{rejxyMat,jdbcType=VARCHAR},
+      </if>
+      <if test="rejyxMat != null" >
+        #{rejyxMat,jdbcType=VARCHAR},
+      </if>
+      <if test="rejyyMat != null" >
+        #{rejyyMat,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="bit.gd.pojo.GDResultPdod" >
+    update gd_result_pdod
+    <set >
+      <if test="parametersId != null" >
+        parameters_id = #{parametersId,jdbcType=INTEGER},
+      </if>
+      <if test="userNo != null" >
+        user_no = #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="imjxxPng != null" >
+        imjxx_png = #{imjxxPng,jdbcType=VARCHAR},
+      </if>
+      <if test="imjxyPng != null" >
+        imjxy_png = #{imjxyPng,jdbcType=VARCHAR},
+      </if>
+      <if test="imjyxPng != null" >
+        imjyx_png = #{imjyxPng,jdbcType=VARCHAR},
+      </if>
+      <if test="imjyyPng != null" >
+        imjyy_png = #{imjyyPng,jdbcType=VARCHAR},
+      </if>
+      <if test="rejxxPng != null" >
+        rejxx_png = #{rejxxPng,jdbcType=VARCHAR},
+      </if>
+      <if test="rejxyPng != null" >
+        rejxy_png = #{rejxyPng,jdbcType=VARCHAR},
+      </if>
+      <if test="rejyxPng != null" >
+        rejyx_png = #{rejyxPng,jdbcType=VARCHAR},
+      </if>
+      <if test="rejyyPng != null" >
+        rejyy_png = #{rejyyPng,jdbcType=VARCHAR},
+      </if>
+      <if test="imjxxMat != null" >
+        imjxx_mat = #{imjxxMat,jdbcType=VARCHAR},
+      </if>
+      <if test="imjxyMat != null" >
+        imjxy_mat = #{imjxyMat,jdbcType=VARCHAR},
+      </if>
+      <if test="imjyxMat != null" >
+        imjyx_mat = #{imjyxMat,jdbcType=VARCHAR},
+      </if>
+      <if test="imjyyMat != null" >
+        imjyy_mat = #{imjyyMat,jdbcType=VARCHAR},
+      </if>
+      <if test="rejxxMat != null" >
+        rejxx_mat = #{rejxxMat,jdbcType=VARCHAR},
+      </if>
+      <if test="rejxyMat != null" >
+        rejxy_mat = #{rejxyMat,jdbcType=VARCHAR},
+      </if>
+      <if test="rejyxMat != null" >
+        rejyx_mat = #{rejyxMat,jdbcType=VARCHAR},
+      </if>
+      <if test="rejyyMat != null" >
+        rejyy_mat = #{rejyyMat,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="bit.gd.pojo.GDResultPdod" >
+    update gd_result_pdod
+    set parameters_id = #{parametersId,jdbcType=INTEGER},
+      user_no = #{userNo,jdbcType=VARCHAR},
+      imjxx_png = #{imjxxPng,jdbcType=VARCHAR},
+      imjxy_png = #{imjxyPng,jdbcType=VARCHAR},
+      imjyx_png = #{imjyxPng,jdbcType=VARCHAR},
+      imjyy_png = #{imjyyPng,jdbcType=VARCHAR},
+      rejxx_png = #{rejxxPng,jdbcType=VARCHAR},
+      rejxy_png = #{rejxyPng,jdbcType=VARCHAR},
+      rejyx_png = #{rejyxPng,jdbcType=VARCHAR},
+      rejyy_png = #{rejyyPng,jdbcType=VARCHAR},
+      imjxx_mat = #{imjxxMat,jdbcType=VARCHAR},
+      imjxy_mat = #{imjxyMat,jdbcType=VARCHAR},
+      imjyx_mat = #{imjyxMat,jdbcType=VARCHAR},
+      imjyy_mat = #{imjyyMat,jdbcType=VARCHAR},
+      rejxx_mat = #{rejxxMat,jdbcType=VARCHAR},
+      rejxy_mat = #{rejxyMat,jdbcType=VARCHAR},
+      rejyx_mat = #{rejyxMat,jdbcType=VARCHAR},
+      rejyy_mat = #{rejyyMat,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

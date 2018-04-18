@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bit.gd.dao.GDParameterPdodMapper" >
+  <resultMap id="BaseResultMap" type="bit.gd.pojo.GDParameterPdod" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_no" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="txt_ix_st" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="txt_ix_st_hash" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="txt_ix_nd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="txt_ix_nd_hash" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_no, txt_ix_st, txt_ix_st_hash, txt_ix_nd, txt_ix_nd_hash, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from gd_parameter_pdod
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from gd_parameter_pdod
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="bit.gd.pojo.GDParameterPdod" useGeneratedKeys="true" keyProperty="id">
+    insert into gd_parameter_pdod (id, user_no, txt_ix_st, 
+      txt_ix_st_hash, txt_ix_nd, txt_ix_nd_hash, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{userNo,jdbcType=VARCHAR}, #{txtIxSt,jdbcType=VARCHAR}, 
+      #{txtIxStHash,jdbcType=VARCHAR}, #{txtIxNd,jdbcType=VARCHAR}, #{txtIxNdHash,jdbcType=VARCHAR}, 
+      now(), now())
+  </insert>
+  <insert id="insertSelective" parameterType="bit.gd.pojo.GDParameterPdod" >
+    insert into gd_parameter_pdod
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userNo != null" >
+        user_no,
+      </if>
+      <if test="txtIxSt != null" >
+        txt_ix_st,
+      </if>
+      <if test="txtIxStHash != null" >
+        txt_ix_st_hash,
+      </if>
+      <if test="txtIxNd != null" >
+        txt_ix_nd,
+      </if>
+      <if test="txtIxNdHash != null" >
+        txt_ix_nd_hash,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userNo != null" >
+        #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="txtIxSt != null" >
+        #{txtIxSt,jdbcType=VARCHAR},
+      </if>
+      <if test="txtIxStHash != null" >
+        #{txtIxStHash,jdbcType=VARCHAR},
+      </if>
+      <if test="txtIxNd != null" >
+        #{txtIxNd,jdbcType=VARCHAR},
+      </if>
+      <if test="txtIxNdHash != null" >
+        #{txtIxNdHash,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="bit.gd.pojo.GDParameterPdod" >
+    update gd_parameter_pdod
+    <set >
+      <if test="userNo != null" >
+        user_no = #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="txtIxSt != null" >
+        txt_ix_st = #{txtIxSt,jdbcType=VARCHAR},
+      </if>
+      <if test="txtIxStHash != null" >
+        txt_ix_st_hash = #{txtIxStHash,jdbcType=VARCHAR},
+      </if>
+      <if test="txtIxNd != null" >
+        txt_ix_nd = #{txtIxNd,jdbcType=VARCHAR},
+      </if>
+      <if test="txtIxNdHash != null" >
+        txt_ix_nd_hash = #{txtIxNdHash,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="bit.gd.pojo.GDParameterPdod" >
+    update gd_parameter_pdod
+    set user_no = #{userNo,jdbcType=VARCHAR},
+      txt_ix_st = #{txtIxSt,jdbcType=VARCHAR},
+      txt_ix_st_hash = #{txtIxStHash,jdbcType=VARCHAR},
+      txt_ix_nd = #{txtIxNd,jdbcType=VARCHAR},
+      txt_ix_nd_hash = #{txtIxNdHash,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByRecord" resultMap="BaseResultMap" parameterType="bit.gd.pojo.GDParameterPdod" >
+    select
+    <include refid="Base_Column_List" />
+    from gd_parameter_pdod
+    where txt_ix_st_hash = #{txtIxStHash,jdbcType=VARCHAR}
+    and txt_ix_nd_hash = #{txtIxNdHash,jdbcType=VARCHAR}
+  </select>
+</mapper>
