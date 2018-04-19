@@ -5,21 +5,20 @@ import bit.gd.common.ResponseCode;
 import bit.gd.common.ServerResponse;
 import bit.gd.dao.*;
 import bit.gd.pojo.*;
+import bit.gd.singleton.GDMatlabSingleton;
 import bit.gd.service.IConnectMatlabService;
 import bit.gd.service.IDataPersistenceService;
 import bit.gd.service.IFileService;
 import bit.gd.util.PropertiesUtil;
 import com.mathworks.toolbox.javabuilder.MWException;
+import gdmatlab.GDMatlab;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pdod.Pdod;
-import pwo.Pwo;
-import opc.Opc;
-import smo.Smo;
+
 
 import java.io.File;
 import java.util.Date;
@@ -82,9 +81,9 @@ public class ConnectMatlabServiceImpl implements IConnectMatlabService {
         }
         Date startTime = new Date();
 
-        Smo smo = null;
+        GDMatlab smo = null;
         try {
-            smo = new Smo();
+            smo = GDMatlabSingleton.getGdMatlab();
             smo.EUV_Pixelated_SMO_MAIN(4, gdParameterSmo.getCoreNum(), gdParameterSmo.getMaskDimension(),
                     gdParameterSmo.getPixelSize(), gdParameterSmo.getReflect(), gdParameterSmo.getAbsorb(),
                     gdParameterSmo.getShadowNear(), gdParameterSmo.getShadowFar(), gdParameterSmo.getWavelength(),
@@ -100,13 +99,6 @@ public class ConnectMatlabServiceImpl implements IConnectMatlabService {
             gdParameterSmoMapper.deleteByPrimaryKey(gdParameterSmo.getId());
             gdRunningStateMapper.updateByUserNoAndModuleName(userNo, Const.Module.MODULE_SMO, Const.RunningState.IDLE);
             return ServerResponse.createByErrorMessage("仿真失败");
-        }  finally {
-            try {
-                smo.closepool();
-            } catch (MWException e) {
-                e.printStackTrace();
-            }
-            smo.dispose();
         }
 
         Date endTime = new Date();
@@ -182,9 +174,9 @@ public class ConnectMatlabServiceImpl implements IConnectMatlabService {
         }
         Date startTime = new Date();
 
-        Opc opc = null;
+        GDMatlab opc = null;
         try {
-            opc = new Opc();
+            opc = GDMatlabSingleton.getGdMatlab();
             opc.EUV_OPC_main(4, gdParameterOpc.getCoreNum(), gdParameterOpc.getMaskDimension(),
                     gdParameterOpc.getPixelSize(), gdParameterOpc.getReflect(), gdParameterOpc.getAbsorb(),
                     gdParameterOpc.getShadowNear(), gdParameterOpc.getShadowFar(), gdParameterOpc.getWavelength(),
@@ -200,13 +192,6 @@ public class ConnectMatlabServiceImpl implements IConnectMatlabService {
             gdParameterOpcMapper.deleteByPrimaryKey(gdParameterOpc.getId());
             gdRunningStateMapper.updateByUserNoAndModuleName(userNo, Const.Module.MODULE_OPC, Const.RunningState.IDLE);
             return ServerResponse.createByErrorMessage("仿真失败");
-        } finally {
-            try {
-                opc.closepool();
-            } catch (MWException e) {
-                e.printStackTrace();
-            }
-            opc.dispose();
         }
 
 
@@ -282,9 +267,9 @@ public class ConnectMatlabServiceImpl implements IConnectMatlabService {
         }
         Date startTime = new Date();
 
-        Pwo pwo = null;
+        GDMatlab pwo = null;
         try {
-            pwo = new Pwo();
+            pwo = GDMatlabSingleton.getGdMatlab();
             pwo.SMPWO_main(3, gdParameterPwo.getCoreNum(), gdParameterPwo.getWavelength(), gdParameterPwo.getNa(),
                     gdParameterPwo.getRatio(), gdParameterPwo.getPolarization(), gdParameterPwo.getRefractiveIndex(),
                     gdParameterPwo.getPixel(), gdParameterPwo.getStepPupil(), gdParameterPwo.getOmegaPupil(),
@@ -298,13 +283,6 @@ public class ConnectMatlabServiceImpl implements IConnectMatlabService {
             gdParameterPwoMapper.deleteByPrimaryKey(gdParameterPwo.getId());
             gdRunningStateMapper.updateByUserNoAndModuleName(userNo, Const.Module.MODULE_SMPWO, Const.RunningState.IDLE);
             return ServerResponse.createByErrorMessage("仿真失败");
-        } finally {
-            try {
-                pwo.closepool();
-            } catch (MWException e) {
-                e.printStackTrace();
-            }
-            pwo.dispose();
         }
 
         Date endTime = new Date();
@@ -380,9 +358,9 @@ public class ConnectMatlabServiceImpl implements IConnectMatlabService {
         }
         Date startTime = new Date();
 
-        Pdod pdod = null;
+        GDMatlab pdod = null;
         try {
-            pdod = new Pdod();
+            pdod = GDMatlabSingleton.getGdMatlab();
             pdod.Polarizationaberration(8,
                     PropertiesUtil.getProperty("ftp.server.path") + Const.UPLOAD_FILE_PATH + File.separator + gdParameterPdod.getTxtIxSt(),
                     PropertiesUtil.getProperty("ftp.server.path") + Const.UPLOAD_FILE_PATH + File.separator + gdParameterPdod.getTxtIxNd(),
@@ -393,8 +371,6 @@ public class ConnectMatlabServiceImpl implements IConnectMatlabService {
             gdParameterPdodMapper.deleteByPrimaryKey(gdParameterPdod.getId());
             gdRunningStateMapper.updateByUserNoAndModuleName(userNo, Const.Module.MODULE_PDOD, Const.RunningState.IDLE);
             return ServerResponse.createByErrorMessage("仿真失败");
-        } finally {
-            pdod.dispose();
         }
 
         Date endTime = new Date();
