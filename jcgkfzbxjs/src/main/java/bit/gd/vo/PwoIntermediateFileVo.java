@@ -19,13 +19,13 @@ public class PwoIntermediateFileVo {
     private String pwoTargetPatternPng;
     private String pwoTheitaPupilPng;
 
-    public PwoIntermediateFileVo(String userNo) {
+    public PwoIntermediateFileVo(String userNo, String uuid) {
         this.ip = PropertiesUtil.getProperty("tomcat.ip");
-        this.pwoMaskPatternPng = userNo + File.separator + Const.PwoMatlabOutputFilename.PWO_Mask_Pattern_Png;
-        this.pwoPrintImagePng =  userNo + File.separator + Const.PwoMatlabOutputFilename.PWO_Print_Image_Png;
-        this.pwoSourcePatternPng =  userNo + File.separator + Const.PwoMatlabOutputFilename.PWO_Source_Pattern_Png;
-        this.pwoTargetPatternPng =  userNo + File.separator + Const.PwoMatlabOutputFilename.PWO_Target_Pattern_Png;
-        this.pwoTheitaPupilPng =  userNo + File.separator + Const.PwoMatlabOutputFilename.PWO_Theita_Pupil_Png;
+        this.pwoMaskPatternPng = userNo + File.separator + uuid + Const.PwoMatlabOutputFilename.PWO_Mask_Pattern_Png;
+        this.pwoPrintImagePng =  userNo + File.separator + uuid + Const.PwoMatlabOutputFilename.PWO_Print_Image_Png;
+        this.pwoSourcePatternPng =  userNo + File.separator + uuid + Const.PwoMatlabOutputFilename.PWO_Source_Pattern_Png;
+        this.pwoTargetPatternPng =  userNo + File.separator + uuid + Const.PwoMatlabOutputFilename.PWO_Target_Pattern_Png;
+        this.pwoTheitaPupilPng =  userNo + File.separator + uuid + Const.PwoMatlabOutputFilename.PWO_Theita_Pupil_Png;
     }
 
     public double getError() {

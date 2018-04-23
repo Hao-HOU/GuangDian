@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.UUID;
 
 /**
  * Created by Hao HOU on 2018/3/12.
@@ -50,7 +51,7 @@ public class CopyFileTest {
 
     @Test
     public void copyInter() {
-        Assert.assertTrue(iFileService.copySmoIntermediateResult("999"));
+        Assert.assertTrue(iFileService.copySmoIntermediateResult("999", UUID.randomUUID().toString()));
     }
 
     @Test

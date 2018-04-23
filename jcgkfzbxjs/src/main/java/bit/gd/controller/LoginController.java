@@ -4,12 +4,14 @@ import bit.gd.common.Const;
 import bit.gd.common.ResponseCode;
 import bit.gd.common.ServerResponse;
 import bit.gd.request.User;
+import bit.gd.service.IFileService;
 import bit.gd.vo.UserVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +28,8 @@ import java.util.Set;
 @Controller
 @RequestMapping("/api")
 public class LoginController {
+    @Autowired
+    IFileService iFileService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
@@ -39,6 +43,8 @@ public class LoginController {
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
             try {
                 subject.login(token);
+                iFileService.deleteIntermediateFolder(user.getUsername());
+                subject.getSession().setTimeout(7 * 24 * 60 * 60 * 1000);
             } catch (UnknownAccountException uae) {
                 return ServerResponse.createByErrorMessage("账号不存在");
             } catch (IncorrectCredentialsException ice) {

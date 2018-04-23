@@ -2,6 +2,7 @@ package bit.gd.service.impl;
 
 import bit.gd.common.Const;
 import bit.gd.service.IFileService;
+import bit.gd.threads.DeleteFolderThread;
 import bit.gd.util.FTPUtil;
 import bit.gd.util.FileMD5Util;
 import bit.gd.util.PropertiesUtil;
@@ -105,7 +106,7 @@ public class FileServiceImpl implements IFileService {
         }
     }
 
-    public boolean copySmoIntermediateResult(String userNo) {
+    public boolean copySmoIntermediateResult(String userNo, String uuid) {
         List<String> pngFiles = Lists.newArrayList();
         pngFiles.add(Const.SmoMatlabOutputFilename.SMO_Error_Convergence_Png);
         pngFiles.add(Const.SmoMatlabOutputFilename.SMO_Mask_Pattern_Png);
@@ -118,7 +119,7 @@ public class FileServiceImpl implements IFileService {
 
         for (String png : pngFiles) {
             String oldPath = smoOutputPath + userNo + File.separator + png;
-            String newPath = intermediateFilePath + userNo + File.separator + png;
+            String newPath = intermediateFilePath + userNo + File.separator + uuid + png;
             if (!copyIntermediateResultPNG(oldPath, newPath)) {
                 return false;
             }
@@ -127,7 +128,7 @@ public class FileServiceImpl implements IFileService {
         return true;
     }
 
-    public boolean copyOpcIntermediateResult(String userNo) {
+    public boolean copyOpcIntermediateResult(String userNo, String uuid) {
         List<String> pngFiles = Lists.newArrayList();
         pngFiles.add(Const.OpcMatlabOutputFilename.OPC_Error_Convergence_Png);
         pngFiles.add(Const.OpcMatlabOutputFilename.OPC_Mask_Pattern_Png);
@@ -140,7 +141,7 @@ public class FileServiceImpl implements IFileService {
 
         for (String png : pngFiles) {
             String oldPath = opcOutputPath + userNo + File.separator + png;
-            String newPath = intermediateFilePath + userNo + File.separator + png;
+            String newPath = intermediateFilePath + userNo + File.separator + uuid + png;
             if (!copyIntermediateResultPNG(oldPath, newPath)) {
                 return false;
             }
@@ -149,7 +150,7 @@ public class FileServiceImpl implements IFileService {
         return true;
     }
 
-    public boolean copyPwoIntermediateResult(String userNo) {
+    public boolean copyPwoIntermediateResult(String userNo, String uuid) {
         List<String> pngFiles = Lists.newArrayList();
         pngFiles.add(Const.PwoMatlabOutputFilename.PWO_Mask_Pattern_Png);
         pngFiles.add(Const.PwoMatlabOutputFilename.PWO_Print_Image_Png);
@@ -162,7 +163,7 @@ public class FileServiceImpl implements IFileService {
 
         for (String png : pngFiles) {
             String oldPath = opcOutputPath + userNo + File.separator + png;
-            String newPath = intermediateFilePath + userNo + File.separator + png;
+            String newPath = intermediateFilePath + userNo + File.separator + uuid + png;
             if (!copyIntermediateResultPNG(oldPath, newPath)) {
                 return false;
             }
@@ -198,5 +199,11 @@ public class FileServiceImpl implements IFileService {
         }
 
         return true;
+    }
+
+    public void deleteIntermediateFolder(String userNo) {
+        String path = System.getProperty("bit.gd") + Const.INTER_FILE_PATH + File.separator + userNo + File.separator;
+        DeleteFolderThread thread = new DeleteFolderThread(path);
+        thread.run();
     }
 }

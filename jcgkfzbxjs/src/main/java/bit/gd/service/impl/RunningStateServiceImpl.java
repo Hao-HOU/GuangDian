@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.util.UUID;
 
 /**
  * Created by Hao HOU on 2018/3/21.
@@ -56,8 +57,9 @@ public class RunningStateServiceImpl implements IRunningStateService {
     }
 
     private ServerResponse getSmoIntermediateFile(String userNo, GDRunningState gdRunningState) {
-        if (iFileService.copySmoIntermediateResult(userNo)) {
-            SmoIntermediateFileVo smoIntermediateFileVo = new SmoIntermediateFileVo(userNo);
+        String uuid = UUID.randomUUID().toString() + "-";
+        if (iFileService.copySmoIntermediateResult(userNo, uuid)) {
+            SmoIntermediateFileVo smoIntermediateFileVo = new SmoIntermediateFileVo(userNo, uuid);
             double error = JMatIOUtil.getErrorMatValue( PropertiesUtil.getProperty("matlab.output.path.smo")
                     + userNo + File.separator + Const.SmoMatlabOutputFilename.SMO_Error_Mat);
             smoIntermediateFileVo.setError(error);
@@ -76,8 +78,9 @@ public class RunningStateServiceImpl implements IRunningStateService {
     }
 
     private ServerResponse getOpcIntermediateFile(String userNo, GDRunningState gdRunningState) {
-        if (iFileService.copyOpcIntermediateResult(userNo)) {
-            OpcIntermediateFileVo opcIntermediateFileVo = new OpcIntermediateFileVo(userNo);
+        String uuid = UUID.randomUUID().toString() + "-";
+        if (iFileService.copyOpcIntermediateResult(userNo, uuid)) {
+            OpcIntermediateFileVo opcIntermediateFileVo = new OpcIntermediateFileVo(userNo, uuid);
             double error = JMatIOUtil.getErrorMatValue( PropertiesUtil.getProperty("matlab.output.path.opc")
                     + userNo + File.separator + Const.OpcMatlabOutputFilename.OPC_Error_Mat);
             opcIntermediateFileVo.setError(error);
@@ -100,8 +103,9 @@ public class RunningStateServiceImpl implements IRunningStateService {
     }
 
     private ServerResponse getPwoIntermediateFile(String userNo, GDRunningState gdRunningState) {
-        if (iFileService.copyPwoIntermediateResult(userNo)) {
-            PwoIntermediateFileVo pwoIntermediateFileVo = new PwoIntermediateFileVo(userNo);
+        String uuid = UUID.randomUUID().toString() + "-";
+        if (iFileService.copyPwoIntermediateResult(userNo, uuid)) {
+            PwoIntermediateFileVo pwoIntermediateFileVo = new PwoIntermediateFileVo(userNo, uuid);
             String matFilePath = PropertiesUtil.getProperty("matlab.output.path.pwo");
 
             double error = JMatIOUtil.getPwoErrorMatValue(matFilePath + userNo + File.separator

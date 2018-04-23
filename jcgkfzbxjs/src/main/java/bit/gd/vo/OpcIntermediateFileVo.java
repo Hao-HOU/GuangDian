@@ -20,13 +20,13 @@ public class OpcIntermediateFileVo {
     private String opcSourcePatternPng;
     private String opcErrorConvergenceWeightPng;
 
-    public OpcIntermediateFileVo(String userNo) {
+    public OpcIntermediateFileVo(String userNo, String uuid) {
         this.ip = PropertiesUtil.getProperty("tomcat.ip");
-        this.opcErrorConvergencePng = userNo + File.separator + Const.OpcMatlabOutputFilename.OPC_Error_Convergence_Png;
-        this.opcMaskPatternPng = userNo + File.separator + Const.OpcMatlabOutputFilename.OPC_Mask_Pattern_Png;
-        this.opcPrintImagePng = userNo + File.separator + Const.OpcMatlabOutputFilename.OPC_Print_Image_Png;
-        this.opcSourcePatternPng = userNo + File.separator + Const.OpcMatlabOutputFilename.OPC_Source_Pattern_Png;
-        this.opcErrorConvergenceWeightPng = userNo + File.separator + Const.OpcMatlabOutputFilename.OPC_Error_Convergence_Weight_Png;
+        this.opcErrorConvergencePng = userNo + File.separator + uuid + Const.OpcMatlabOutputFilename.OPC_Error_Convergence_Png;
+        this.opcMaskPatternPng = userNo + File.separator + uuid + Const.OpcMatlabOutputFilename.OPC_Mask_Pattern_Png;
+        this.opcPrintImagePng = userNo + File.separator + uuid + Const.OpcMatlabOutputFilename.OPC_Print_Image_Png;
+        this.opcSourcePatternPng = userNo + File.separator + uuid + Const.OpcMatlabOutputFilename.OPC_Source_Pattern_Png;
+        this.opcErrorConvergenceWeightPng = userNo + File.separator + uuid + Const.OpcMatlabOutputFilename.OPC_Error_Convergence_Weight_Png;
     }
 
     public double getError() {

@@ -19,13 +19,13 @@ public class SmoIntermediateFileVo {
     private String smoSourcePatternPng;
     private String smoErrorConvergenceWeightPng;
 
-    public SmoIntermediateFileVo(String userNo) {
+    public SmoIntermediateFileVo(String userNo, String uuid) {
         this.ip = PropertiesUtil.getProperty("tomcat.ip");
-        this.smoErrorConvergencePng = userNo + File.separator + Const.SmoMatlabOutputFilename.SMO_Error_Convergence_Png;
-        this.smoMaskPatternPng = userNo + File.separator + Const.SmoMatlabOutputFilename.SMO_Mask_Pattern_Png;
-        this.smoPrintImagePng = userNo + File.separator + Const.SmoMatlabOutputFilename.SMO_Print_Image_Png;
-        this.smoSourcePatternPng = userNo + File.separator + Const.SmoMatlabOutputFilename.SMO_Source_Pattern_Png;
-        this.smoErrorConvergenceWeightPng = userNo + File.separator + Const.SmoMatlabOutputFilename.SMO_Error_Convergence_Weight_Png;
+        this.smoErrorConvergencePng = userNo + File.separator + uuid + Const.SmoMatlabOutputFilename.SMO_Error_Convergence_Png;
+        this.smoMaskPatternPng = userNo + File.separator + uuid + Const.SmoMatlabOutputFilename.SMO_Mask_Pattern_Png;
+        this.smoPrintImagePng = userNo + File.separator + uuid + Const.SmoMatlabOutputFilename.SMO_Print_Image_Png;
+        this.smoSourcePatternPng = userNo + File.separator + uuid + Const.SmoMatlabOutputFilename.SMO_Source_Pattern_Png;
+        this.smoErrorConvergenceWeightPng = userNo + File.separator + uuid + Const.SmoMatlabOutputFilename.SMO_Error_Convergence_Weight_Png;
     }
 
     public double getError() {

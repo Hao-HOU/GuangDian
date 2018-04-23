@@ -145,6 +145,7 @@
       <if test="userNo != null and userNo != ''" >
           and user_no = #{userNo,jdbcType=VARCHAR}
       </if>
+    order by id desc
   </select>
 
   <select id="selectAuthorizedModulesSimulationRecords" resultMap="BaseResultMap" >
@@ -168,6 +169,7 @@
     <foreach collection="roles" open="(" close=")" separator="," item="module" index="i">
       #{module}
     </foreach>
+    order by id desc
   </select>
 
   <select id="selectByModuleNameAndParametersId" resultMap="BaseResultMap"  >
